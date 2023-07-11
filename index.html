@@ -9,9 +9,23 @@
 </head>
 <body>
     <div class="box">
-        <div class="card">
-            <img src="https://cdn2.thecatapi.com/images/6v0.jpg" alt="">
-        </div>
-    </div>     
+        <div class="card" id="card"></div>
+    </div>  
+    <button type="button" id="mais_fotos">Mais Fotos</button>   
+    <script>
+        let card = document.getElementById("card");
+        let url = "https://api.thecatapi.com/v1/images/search";
+        let data = async () => (await fetch(url)).json();
+        let btn = document.getElementById("mais_fotos");
+        btn.onclick = () => {
+            data().then((res) => {
+                let img = document.createElement("img");
+                img.src = res[0].url;
+                card.appendChild(img);
+            }).catch((err) => {
+                alter(err);
+            });
+        }
+    </script>
 </body>
 </html>
